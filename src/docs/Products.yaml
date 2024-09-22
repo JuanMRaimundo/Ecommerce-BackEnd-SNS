@@ -1,0 +1,276 @@
+paths:
+  /api/products:
+    get:
+      summary: List of limit/sort products.
+      tags:
+        - Products
+      description: Retrieves a limited, sorted or all  products from the database.
+      parameters:
+        - name: all
+          in: query
+          description: All products returned.
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Limit the number of products returned.
+          required: false
+          schema:
+            type: integer
+        - name: sort
+          in: query
+          description: Sort the products based on the specified criteria.
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The products were successfully retrieved from the database!
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  productsLimit:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+    post:
+      summary: Create a new product.
+      tags:
+        - Products
+      description: Creates a new product in the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  $ref: "#/components/schemas/Product"
+      responses:
+        "201":
+          description: Product created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "400":
+          description: Invalid input data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /api/products/{pid}:
+    get:
+      summary: Get product by Id.
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: Product's ID to rerieve
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved the product by ID.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "500":
+          description: Error inesperado en el servidor - Intente más tarde, o contacte a su administrador
+    put:
+      summary: Edit product selected
+      tags:
+        - Products
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: Product id to edit
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProduct"
+      responses:
+        "200":
+          description: Producto actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  editProduct:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        description: ID del producto.
+                      title:
+                        type: string
+                        description: Título del producto.
+                      code:
+                        type: string
+                        description: Código único del producto.
+                      description:
+                        type: string
+                        description: Descripción del producto.
+                      price:
+                        type: number
+                        description: Precio del producto.
+                      status:
+                        type: boolean
+                        description: Estado del producto.
+                      stock:
+                        type: number
+                        description: Cantidad disponible en stock.
+                      category:
+                        type: string
+                        description: Categoría del producto.
+                      thumbnail:
+                        type: array
+                        items:
+                          type: string
+                        description: Imágenes del producto.
+                      createdAt:
+                        type: string
+                        format: date-time
+                        description: Fecha de creación del producto.
+                      updatedAt:
+                        type: string
+                        format: date-time
+                        description: Fecha de actualización del producto.
+                      __v:
+                        type: integer
+                        description: Versión del producto.
+        "404":
+          description: Producto no encontrado
+        "400":
+          description: Solicitud inválida
+    delete:
+      summary: Delet product by Id
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: Product's Id to delete.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Product deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payload:
+                    type: string
+        "404":
+          description: Product not found.
+        "500":
+          description: Error inesperado en el servidor, intente más tarde.
+  /api/products/mockingproducts:
+    get:
+      summary: Generate mocked products.
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Successfully generated mocked products.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+        "500":
+          description: Error inesperado en el servidor, intente más tarde
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: MongoID autogenerated
+        title:
+          type: string
+          description: Product's name
+        code:
+          type: string
+          description: Product's unique code
+        description:
+          type: string
+          description: Little product's description
+        price:
+          type: number
+          description: Product's price
+        status:
+          type: boolean
+          description: If the product is enabled to be sold
+        stock:
+          type: integer
+          description: Representative number of products available for sale
+        category:
+          type: string
+        thumbail:
+          type: array
+          items:
+            type: string
+        owner:
+          type: string
+          description: Product owner user ID
+    UpdateProduct:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Título del producto.
+        code:
+          type: string
+          description: Código único del producto.
+        description:
+          type: string
+          description: Descripción del producto.
+        price:
+          type: number
+          description: Precio del producto.
+        status:
+          type: boolean
+          description: Estado del producto.
+        stock:
+          type: number
+          description: Cantidad disponible en stock.
+        category:
+          type: string
+          description: Categoría del producto.
+        thumbnail:
+          type: array
+          items:
+            type: string
+          description: Imágenes del producto.
+        owner:
+          type: string
+          description: ID del usuario propietario del producto.

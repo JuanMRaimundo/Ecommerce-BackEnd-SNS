@@ -1,0 +1,350 @@
+paths:
+  /api/carts:
+    get:
+      summary: Retrieve all carts.
+      tags:
+        - Carts
+      description: Retrieves a list of all carts from the database.
+      responses:
+        "200":
+          description: Successfully retrieved all carts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  carts:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Cart"
+        "500":
+          description: Unexpected server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+    post:
+      summary: Create a new cart.
+      tags:
+        - Carts
+      description: Creates a new cart in the database.
+      responses:
+        "201":
+          description: Cart created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payload:
+                    $ref: "#/components/schemas/Cart"
+
+  /api/carts/{cid}:
+    get:
+      summary: Retrieve a cart by ID.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: The ID of the cart to retrieve.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved the cart.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cart:
+                    $ref: "#/components/schemas/Cart"
+        "500":
+          description: Unexpected server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+    put:
+      summary: Edit a cart.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: The ID of the cart to edit.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pid:
+                  type: string
+                quantity:
+                  type: integer
+      responses:
+        "200":
+          description: Cart updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payload:
+                    $ref: "#/components/schemas/Cart"
+        "400":
+          description: Invalid input data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: Unexpected server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+    delete:
+      summary: Delete all products from a cart.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: The ID of the cart to delete products from.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: All products deleted from the cart successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  cart:
+                    $ref: "#/components/schemas/Cart"
+        "400":
+          description: Invalid cart ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: Unexpected server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /api/carts/{cid}/products/{pid}:
+    post:
+      summary: Add a product to a cart.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: The ID of the cart.
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: The ID of the product to add.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Product added to the cart successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payload:
+                    $ref: "#/components/schemas/Cart"
+        "400":
+          description: IEnter a valid MongoDB id as an argument to your request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "404":
+          description: Product not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "403":
+          description: Premium users cannot add their own products to the cart.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+    delete:
+      summary: Remove a product from a cart.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: The ID of the cart.
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: The ID of the product to remove.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Product removed from the cart successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  cart:
+                    $ref: "#/components/schemas/Cart"
+        "400":
+          description: Invalid cart or product ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: Unexpected server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /api/carts/{cid}/purchase:
+    post:
+      summary: Complete the purchase of items in the cart.
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: The ID of the cart to purchase.
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Purchase completed successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  ticket:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      purchase_datatime:
+                        type: number
+                      amount:
+                        type: number
+                      purchaser:
+                        type: string
+                      items:
+                        type: object
+                        properties:
+                          product:
+                            type: string
+                          quantity:
+                            type: number
+                          description:
+                            type: string
+                          price:
+                            type: number
+                          stockPrevCompra:
+                            type: number
+                          stockPostCompra:
+                            type: number
+                          subtotal:
+                            type: number
+        "500":
+          description: Unexpected server error.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                description: The ID of the product.
+              quantity:
+                type: integer
+                description: The quantity of the product in the cart.

@@ -1,0 +1,94 @@
+{{>navbar}}
+
+<main>
+	<h3>Bienvenido al mejor sitio de compras</h3>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Cod.</th>
+				<th scope="col">Producto</th>
+				<th scope="col">Precio</th>
+				<th scope="col">Stock</th>
+				<th scope="col">Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each payload}}
+				<tr>
+					<td>{{code}}</td>
+					<td>{{title}}</td>
+					<td>${{price}}</td>
+					<td>{{stock}}</td>
+					<td><button
+							class="btn btn-info"
+							onclick="addToCart('{{_id}}', '{{../cartId}}')"
+						>Agregar al carrito</button></td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+	<div
+		class="modal fade"
+		id="addToCartModal"
+		tabindex="-1"
+		aria-labelledby="addToCartModalLabel"
+		aria-hidden="true"
+	>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addToCartModalLabel">Producto agregado al
+						carrito</h5>
+					<button
+						type="button"
+						class="btn-close"
+						data-bs-dismiss="modal"
+						aria-label="Close"
+					></button>
+				</div>
+				<div class="modal-body">
+					¡El producto se ha agregado al carrito correctamente!
+				</div>
+				<div class="modal-footer">
+					<button
+						type="button"
+						class="btn btn-secondary"
+						data-bs-dismiss="modal"
+					>Cerrar</button>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<nav aria-label="Page navigation example">
+		<ul class="pagination">
+
+			<li class="page-item"><a class="page-link" href="/home/?page=1">Pág.1</a></li>
+			{{#if hasPrevPage}}
+				<li class="page-item">
+					<a class="page-link" href="/home/?page={{prevPage}}">Ant.</a>
+
+				</li>
+
+			{{/if}}
+			{{#if hasNextPage}}
+				<li class="page-item">
+					<a class="page-link" href="/home/?page={{nextPage}}">Sig.</a>
+
+				</li>
+
+			{{/if}}
+			<li class="page-item">
+
+				<a class="page-link" href="/home/?page={{totalPages}}">Última Pág.</a>
+			</li>
+
+		</ul>
+
+	</nav>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<script src="/js/home.js"></script>

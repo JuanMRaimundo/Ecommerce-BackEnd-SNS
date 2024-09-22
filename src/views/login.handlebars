@@ -1,0 +1,64 @@
+<div class="login mb-3 container">
+
+	<h2 class="text-center">Iniciar Sesión</h2>
+	<div class="container-login">
+		<form action="/api/sessions/login" method="post" class="login-form">
+			{{#if error}}
+				<div class="badge text-bg-danger text-wrap" style="width: 6rem;">
+					{{error}}.
+				</div>
+			{{/if}}
+			<div class="row">
+				<div class="col-md-12">
+
+					<input
+						type="email"
+						name="email"
+						placeholder="correo electrónico"
+						class="login-input form-control"
+					/>
+				</div>
+				<div class="col-md-12">
+
+					<input
+						type="password"
+						name="password"
+						placeholder="contraseña"
+						class="login-input form-control"
+					/>
+				</div>
+				<input type="text" name="web" value="web" hidden />
+			</div>
+			<br />
+			<input
+				type="submit"
+				value="Iniciar Sesión"
+				id="btnSubmit"
+				class="btn btn-primary submit-btn"
+			/>
+
+		</form>
+
+	</div>
+	<div class="row">
+		<div class="col">
+
+			<a class="nav-link text-center" href="/api/sessions/github">
+				<i class="fab fa-github"></i>Acceso vía GitHub</a>
+		</div>
+		<div class="col">
+			<a class="nav-link text-center" id="recoverPasswordLink">Olvidé mi
+				contraseña</a>
+		</div>
+		<div class="col">
+
+			<a class="nav-link" href="/registration"><button
+					class="btn btn-primary submit-btn"
+				>Registrarse</button></a>
+		</div>
+
+	</div>
+
+</div>
+
+<script src="/js/auth/login.js"></script>

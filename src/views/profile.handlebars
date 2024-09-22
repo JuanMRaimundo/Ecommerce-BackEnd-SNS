@@ -1,0 +1,20 @@
+{{>navbar}}
+<div class="profile-conteiner">
+<h2>¡Hola {{user.first_name}}!</h2>
+
+<div class="profile-card"> 
+<h4>Datos del usuario</h4>
+
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary">{{user.age}} años</h6>
+    <p class="card-text">Tu email es: {{user.email}}</p>
+       <p class="card-text">Tu rol: {{user.rol}}</p>
+    <a href="/home" class="card-link">Comprar</a>
+    <a href="/chat" class="card-link">Mi chat</a>
+  </div>
+</div>
+</div>
+
+</div>

@@ -1,0 +1,156 @@
+[
+	{
+		"id": 1,
+		"title": "Remera",
+		"code": 31252146,
+		"description": "Nike",
+		"price": 20000,
+		"status": true,
+		"stock": 20,
+		"category": "remeras",
+		"thumbnail": []
+	},
+	{
+		"id": 2,
+		"title": "Remera",
+		"description": "Adidas",
+		"code": 36923146,
+		"price": 35000,
+		"status": true,
+		"stock": 15,
+		"category": "remeras",
+		"thumbnail": []
+	},
+	{
+		"id": 3,
+		"title": "Pantalon",
+		"description": "Nike",
+		"code": 369852146,
+		"price": 35000,
+		"status": true,
+		"stock": 15,
+		"category": "pantalones",
+		"thumbnail": []
+	},
+	{
+		"id": 4,
+		"title": "Pantalon-DriFit",
+		"description": "Nike",
+		"code": 3696857,
+		"price": 35000,
+		"status": true,
+		"stock": 15,
+		"category": "pantalones",
+		"thumbnail": []
+	},
+	{
+		"id": 5,
+		"title": "Short",
+		"description": "UnderArmour",
+		"code": 3216549,
+		"price": 15400,
+		"status": true,
+		"stock": 10,
+		"category": "shorts",
+		"thumbnail": []
+	},
+	{
+		"id": 6,
+		"title": "Pantalon",
+		"description": "Puma",
+		"code": 369234146,
+		"price": 11000,
+		"status": true,
+		"stock": 10,
+		"category": "pantalones",
+		"thumbnail": []
+	},
+	{
+		"id": 7,
+		"title": "Botines",
+		"description": "Nike",
+		"code": 369852344446,
+		"price": 40000,
+		"status": true,
+		"stock": 15,
+		"category": "botines",
+		"thumbnail": []
+	},
+	{
+		"id": 8,
+		"title": "Botines Borussia",
+		"description": "Puma",
+		"code": 987987987987,
+		"price": "365",
+		"status": true,
+		"stock": 10,
+		"category": "botines",
+		"thumbnails": []
+	},
+	{
+		"id": 9,
+		"title": "Camiseta dry-fit",
+		"description": "Puma",
+		"code": 996325,
+		"price": 15000,
+		"status": true,
+		"stock": 20,
+		"category": "remeras",
+		"thumbnails": []
+	},
+	{
+		"id": 11,
+		"title": "Campera",
+		"description": "Nike",
+		"code": 32165498,
+		"price": 100500,
+		"status": true,
+		"stock": 5,
+		"category": "camperas",
+		"thumbnails": []
+	},
+	{
+		"id": 12,
+		"title": "Remera",
+		"description": "Nike",
+		"code": 3216558,
+		"price": 15500,
+		"status": true,
+		"stock": 10,
+		"category": "remeras",
+		"thumbnails": []
+	},
+	{
+		"id": 13,
+		"title": "Pantalon",
+		"description": "Nike",
+		"code": 32166668,
+		"price": 15500,
+		"status": true,
+		"stock": 10,
+		"category": "pantalones",
+		"thumbnails": []
+	},
+	{
+		"id": 14,
+		"title": "Pantalon",
+		"description": "Adidas",
+		"code": 3217778,
+		"price": 15500,
+		"status": true,
+		"stock": 10,
+		"category": "pantalones",
+		"thumbnails": []
+	},
+	{
+		"id": 15,
+		"title": "Campera",
+		"description": "Adidas",
+		"code": 32179208,
+		"price": 155500,
+		"status": true,
+		"stock": 5,
+		"category": "camperas",
+		"thumbnails": []
+	}
+]

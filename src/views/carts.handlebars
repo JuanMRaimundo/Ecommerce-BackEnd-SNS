@@ -1,0 +1,44 @@
+{{>navbar}}
+
+<main>
+	<h3> Tu carrito n° {{cart._id}}</h3>
+
+	<div class="container text-center">
+		<div class="row">
+			{{#each cart.products}}
+				<div class="col">
+					<div class="card" style="width: 18rem;">
+						<div class="card-body">
+							<h5 class="card-title">{{this.product.title}}</h5>
+							<h6
+								class="card-subtitle mb-2 text-body-secondary"
+							>{{this.product.description}}</h6>
+							<p class="card-text">Precio: ${{this.product.price}}</p>
+							<p class="card-text">Cantidad: {{this.quantity}}</p>
+						</div>
+					</div>
+				</div>
+			{{/each}}
+		</div>
+	</div>
+</main>
+
+<spam>
+	<button type="button" class="btn btn-success"><a
+			class="nav-link active"
+			href="/home"
+		>Seguir comprando</a></button>
+</spam>
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <form id="purchaseForm">
+				<input type="hidden" id="cartId" name="cartId" value="{{cart._id}}">
+                <button type="submit" class="btn btn-success">Finalizar compra</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/carts.js"></script>

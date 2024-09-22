@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="/home">SNSports</a>
+		<button
+			class="navbar-toggler"
+			type="button"
+			data-bs-toggle="collapse"
+			data-bs-target="#navbarNavAltMarkup"
+			aria-controls="navbarNavAltMarkup"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a
+					class="nav-link active"
+					aria-current="page"
+					href="/realTimeProducts"
+				>Productos del día</a>
+
+				<a class="nav-link active" href="/carts/{{cartId}}">Mi carrito</a>
+				<li class="nav-item dropdown">
+					<a
+						class="nav-link dropdown-toggle"
+						href="/profile"
+						role="button"
+						data-bs-toggle="dropdown"
+						aria-expanded="false"
+					>
+						Perfil
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="/profile">Mi perfil</a></li>
+						<li><a class="dropdown-item" href="/chat">Mensajes</a></li>
+						<li><a class="dropdown-item" href="/registration">Registro</a></li>
+						<li><a class="dropdown-item" href="/login">Iniciar sesión</a></li>
+
+						<li><hr class="dropdown-divider" /></li>
+						<li><a class="dropdown-item" href="#" onclick="logout()">Cerrar
+								sesión</a></li>
+					</ul>
+				</li>
+
+			</div>
+		</div>
+	</div>
+</nav>
+
+<script>
+	function logout() { fetch('/api/sessions/logout', { method: 'PUT', headers: {
+	'Content-Type': 'application/json', }, body: JSON.stringify({ web: true }) })
+	.then(response => { if (response.redirected) { window.location.href =
+	response.url; } else { return response.json(); } }) .catch(error =>
+	console.error('Error al cerrar sesión:', error)); }
+</script>
